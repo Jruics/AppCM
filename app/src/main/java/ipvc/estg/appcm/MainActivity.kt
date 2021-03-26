@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    /*
+    //Funcionalidade implementada no Sprint03
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle item selection
         return when (item.itemId) {
@@ -96,23 +96,6 @@ class MainActivity : AppCompatActivity() {
                 true
             }
 
-            R.id.cidadesPortugal -> {
-
-                // recycler view
-                val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-                val adapter = NoteAdapter(this)
-                recyclerView.adapter = adapter
-                recyclerView.layoutManager = LinearLayoutManager(this)
-
-                // view model
-                noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
-                noteViewModel.getNotesFromTitle("Portugal").observe(this, Observer { notes ->
-                    // Update the cached copy of the words in the adapter.
-                    notes?.let { adapter.setNotes(it) }
-                })
-
-                true
-            }
 
             R.id.todasNotas -> {
 
@@ -124,7 +107,7 @@ class MainActivity : AppCompatActivity() {
 
                 // view model
                 noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
-                noteViewModel.allCities.observe(this, Observer { cities ->
+                noteViewModel.allNotes.observe(this, Observer { cities ->
                     // Update the cached copy of the words in the adapter.
                     cities?.let { adapter.setNotes(it) }
                 })
@@ -133,34 +116,21 @@ class MainActivity : AppCompatActivity() {
                 true
             }
 
-            R.id.getCountryFromAveiro -> {
-                noteViewModel = ViewModelProvider(this).get(NoteViewModel::class.java)
-                noteViewModel.getCountryFromCity("Aveiro").observe(this, Observer { city ->
-                    Toast.makeText(this, city.country, Toast.LENGTH_SHORT).show()
-                })
-                true
-            }
-
-            R.id.apagarAveiro -> {
-                noteViewModel.deleteByCity("Aveiro")
+            R.id.apagarTitulo -> {
+                noteViewModel.deleteByTitle("Aveiro")
                 true
             }
 
             R.id.alterar -> {
-                val city = City(id = 1, city = "xxx", country = "xxx")
-                noteViewModel.updateCity(city)
-                true
-            }
-
-            R.id.alteraraveiro -> {
-                noteViewModel.updateCountryFromCity("Aveiro", "Japão")
+                val note = Note(id = 1, title = "xxx", body = "xxx", address = "xxx")
+                noteViewModel.updateNote(note)
                 true
             }
 
             else -> super.onOptionsItemSelected(item)
         }
     }
-    */
+
 
     
 }

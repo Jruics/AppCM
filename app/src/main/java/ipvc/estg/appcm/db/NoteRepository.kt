@@ -31,11 +31,15 @@ class NoteRepository(private val noteDao: NoteDao) {
         noteDao.deleteByTitle(title)
     }
 
-    suspend fun updateNote(note: Note){
-        noteDao.updateCity(note)
+    suspend fun deleteByID(id: Int){
+        noteDao.deleteByID(id)
     }
 
-    suspend fun udpateNoteFromId(title: String, body: String, address: String, id: Int){
-        noteDao.updateNoteFromTitle(title, body, address, id)
+    suspend fun updateNote(note: Note){
+        noteDao.updateNote(note)
+    }
+
+    suspend fun updateNoteFromId(title: String, body: String, address: String, id: Int){
+        noteDao.updateNoteFromId(title, body, address, id)
     }
 }

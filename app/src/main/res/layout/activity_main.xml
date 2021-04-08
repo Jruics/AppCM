@@ -38,7 +38,7 @@ So, we are leaving the template code in. -->
         tools:listitem="@layout/recyclerview_item" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fab1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="wrap_content"
@@ -46,5 +46,30 @@ So, we are leaving the template code in. -->
         android:layout_margin="16dp"
         android:contentDescription="@string/add_word"
         android:src="@drawable/ic_baseline_add_24"/>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="@string/add_word"
+        android:src="@drawable/ic_baseline_delete_forever_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/fab1" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:contentDescription="@string/add_word"
+        android:src="@drawable/ic_baseline_edit_24"
+        app:layout_constraintBottom_toTopOf="@+id/fab1"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

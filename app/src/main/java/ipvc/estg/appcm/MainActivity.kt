@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -18,19 +19,24 @@ import ipvc.estg.appcm.adapters.NoteAdapter
 import ipvc.estg.appcm.entities.Note
 import ipvc.estg.appcm.viewModel.NoteViewModel
 
-class MainActivity : AppCompatActivity() {
+const val PARAM_ID: String = "id"
+const val PARAM_TITLE: String = "title"
+const val PARAM_BODY: String = "body"
+const val PARAM_ADDRESS: String = "address"
+
+//class MainActivity : AppCompatActivity(), NoteAdapter.OnItemClickListener{
+class MainActivity : AppCompatActivity(), CellClickListener{
 
     private lateinit var noteViewModel: NoteViewModel
-    private val newWordActivityRequestCode = 1
-    private val deleteNoteRequestCode = 2
-    private val editNoteRequestCode = 3
+    private val newNoteActivityRequestCode = 1
+    private val changeNoteActivityRequestCode = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-        val adapter = NoteAdapter(this)
+        val adapter = NoteAdapter(this, this)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -42,102 +48,58 @@ class MainActivity : AppCompatActivity() {
         val fab1 = findViewById<FloatingActionButton>(R.id.fab1)
         fab1.setOnClickListener{
             val intent = Intent(this@MainActivity, AddNote::class.java)
-            startActivityForResult(intent, newWordActivityRequestCode)
+            startActivityForResult(intent, newNoteActivityRequestCode)
         }
+    }
 
-        val fab3 = findViewById<FloatingActionButton>(R.id.fab2)
-        fab3.setOnClickListener{
-            val intent = Intent(this@MainActivity, DeleteNote::class.java)
-            startActivityForResult(intent, deleteNoteRequestCode)
-        }
-
-        val fab2 = findViewById<FloatingActionButton>(R.id.fab3)
-        fab2.setOnClickListener{
-            val intent = Intent(this@MainActivity, EditNote::class.java)
-            startActivityForResult(intent, editNoteRequestCode)
-        }
+    override fun onCellClickListener(data: Note) {
+        val intent = Intent(this, EditNote::class.java)
+        intent.putExtra(PARAM_ID, data.id.toString())
+        intent.putExtra(PARAM_TITLE, data.title.toString())
+        intent.putExtra(PARAM_BODY, data.body.toString())
+        intent.putExtra(PARAM_ADDRESS, data.address.toString())
+        startActivityForResult(intent, changeNoteActivityRequestCode)
+        Log.e("***ID", data.id.toString())
+        Toast.makeText(this, "Note touched" + data.id.toString() + data.title.toString() + data.address.toString(), Toast.LENGTH_SHORT).show()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if(requestCode == newWordActivityRequestCode && resultCode == Activity.RESULT_OK) {
-            /*
-            data?.getStringExtra(AddNote.EXTRA_REPLY)?.let {
-                val tempTitle = data.getStringExtra("title").toString()
-                val tempBody = data.getStringExtra("body").toString()
-                val tempAddress = data.getStringExtra("address").toString()
-
-                val note = Note(title = it, body = "body", address = "address")
-                noteViewModel.insert(note)
-            }
-            */
-
-            val newTitle = data?.getStringExtra(AddNote.EXTRA_REPLY_TITLE)
-            val newBody = data?.getStringExtra(AddNote.EXTRA_REPLY_BODY)
-            val newAddress = data?.getStringExtra(AddNote.EXTRA_REPLY_ADDRESS)
-
-            if (newTitle != null && newBody != null && newAddress != null) {
-                val note = Note(title = newTitle, body = newBody, address = newAddress)
-                noteViewModel.insert(note)
-            }
-
-            /*
-            var title = data?.getStringExtra(AddNote.EXTRA_REPLY_TITLE).toString()
-            var body = data?.getStringExtra(AddNote.EXTRA_REPLY_BODY).toString()
-            var address = data?.getStringExtra(AddNote.EXTRA_REPLY_ADDRESS).toString()
-
+        //CRIAR NOTA
+        if (requestCode == newNoteActivityRequestCode && resultCode == Activity.RESULT_OK) {
+            val title = data?.getStringExtra(AddNote.EXTRA_REPLY_TITLE).toString()
+            val body = data?.getStringExtra(AddNote.EXTRA_REPLY_BODY).toString()
+            val address = data?.getStringExtra(AddNote.EXTRA_REPLY_ADDRESS).toString()
             val note = Note(title = title, body = body, address = address)
             noteViewModel.insert(note)
-            */
-        }else if(requestCode == editNoteRequestCode && resultCode == Activity.RESULT_OK){
-            /*
-            val originalTitle = data?.getStringExtra(EditNote.EXTRA_REPLY_ORIGINAL_TITLE)
-            val newTitle = data?.getStringExtra(EditNote.EXTRA_REPLY_TITLE)
-            val newBody = data?.getStringExtra(EditNote.EXTRA_REPLY_BODY)
-            val newAddress = data?.getStringExtra(EditNote.EXTRA_REPLY_ADDRESS)
 
 
-            if (newTitle != null && newBody != null && newAddress != null && originalTitle == newTitle) {
-                val note = Note(title = newTitle, body = newBody, address = newAddress)
-                noteViewModel.updateNote(note)
-            }
-            */
-
-            val originalId = data?.getStringExtra(EditNote.EXTRA_REPLY_ID)
-            val newTitle = data?.getStringExtra(EditNote.EXTRA_REPLY_TITLE)
-            val newBody = data?.getStringExtra(EditNote.EXTRA_REPLY_BODY)
-            val newAddress = data?.getStringExtra(EditNote.EXTRA_REPLY_ADDRESS)
-
-
-            if (originalId != null && newTitle != null && newBody != null && newAddress != null) {
-                //val note = Note(title = newTitle, body = newBody, address = newAddress)
-                //noteViewModel.updateNote(note)
-                noteViewModel.updateNoteFromId(newTitle, newBody, newAddress, originalId.toInt())
-                println(originalId.toInt())
-                println(newTitle)
-                println(newBody)
-                println(newAddress)
-            }
-
-        }else if(requestCode == deleteNoteRequestCode && resultCode == Activity.RESULT_OK){
-
-            /*
-            val originalTitle = data?.getStringExtra(DeleteNote.EXTRA_REPLY_ORIGINAL_TITLE)
-
-            if (originalTitle != null) {
-                noteViewModel.deleteByTitle(originalTitle)
-            }
-             */
-            val originalId = data?.getStringExtra(DeleteNote.EXTRA_REPLY_ORIGINAL_ID)
-
-            if (originalId != null) {
-                noteViewModel.deleteByID(originalId.toInt())
-                //println(originalId.toInt())
-            }
+        } else if (resultCode == Activity.RESULT_CANCELED) {
+            Toast.makeText(this, "Error creating", Toast.LENGTH_SHORT).show()
         }
-        else{
-            Toast.makeText(applicationContext, "Nota vazia; não inserida", Toast.LENGTH_LONG).show()
+
+        // EDITAR E APAGAR NOTA
+        if (requestCode == changeNoteActivityRequestCode && resultCode == Activity.RESULT_OK) {
+            var edit_title = data?.getStringExtra(EditNote.EXTRA_REPLY_TITLE).toString()
+            var edit_body = data?.getStringExtra(EditNote.EXTRA_REPLY_BODY).toString()
+            var edit_address = data?.getStringExtra(EditNote.EXTRA_REPLY_ADDRESS).toString()
+
+            var id = data?.getStringExtra(EditNote.EXTRA_REPLY_ID)
+            var id_delete = data?.getStringExtra(EditNote.EXTRA_DELETE_ID)
+            if(data?.getStringExtra(EditNote.EXTRA_TYPE) == "EDIT"){
+                noteViewModel.update(id?.toIntOrNull(), edit_title, edit_body, edit_address)
+                Toast.makeText(this, "Note altered", Toast.LENGTH_SHORT).show()
+            } else if(data?.getStringExtra(EditNote.EXTRA_TYPE) == "DELETE"){
+                noteViewModel.delete(id_delete?.toIntOrNull())
+                Toast.makeText(this, "Note deleted", Toast.LENGTH_SHORT).show()
+            }
+        } else if (resultCode == Activity.RESULT_CANCELED) {
+            if(data?.getStringExtra(EditNote.EXTRA_TYPE) == "EDIT"){
+                Toast.makeText(this, "Error editing", Toast.LENGTH_SHORT).show()
+            } else if(data?.getStringExtra(EditNote.EXTRA_TYPE) == "DELETE"){
+                Toast.makeText(this, "Error deleting", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -161,7 +123,7 @@ class MainActivity : AppCompatActivity() {
 
                 // recycler view
                 val recyclerView = findViewById<RecyclerView>(R.id.recyclerview)
-                val adapter = NoteAdapter(this)
+                val adapter = NoteAdapter(this, this)
                 recyclerView.adapter = adapter
                 recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -176,24 +138,7 @@ class MainActivity : AppCompatActivity() {
                 true
             }
 
-            /*
-            R.id.apagarID -> {
-                //noteViewModel.deleteByTitle("Aveiro")
-                true
-            }
-
-            R.id.alterarID -> {
-                //val note = Note(id = 1, title = "xxx", body = "xxx", address = "xxx")
-                //noteViewModel.updateNote(note)
-                true
-            }
-            */
-
-
             else -> super.onOptionsItemSelected(item)
         }
     }
-
-
-    
 }

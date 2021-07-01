@@ -12,94 +12,72 @@ import androidx.appcompat.app.AppCompatActivity
 
 class EditNote : AppCompatActivity() {
 
-    /*
-    private lateinit var editWordViewTitle: EditText
-    private lateinit var editWordViewBody: EditText
-    private lateinit var editWordViewAddress: EditText
-    private lateinit var editWordViewOriginalTitle: EditText
-    */
-
-    private lateinit var editWordViewId: EditText
-    private lateinit var editWordViewTitle: EditText
-    private lateinit var editWordViewBody: EditText
-    private lateinit var editWordViewAddress: EditText
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_note)
 
-        /*editWordViewOriginalTitle = findViewById(R.id.original_title)
-        editWordViewTitle = findViewById(R.id.edit_title)
-        editWordViewBody = findViewById(R.id.edit_body)
-        editWordViewAddress = findViewById(R.id.edit_address)*/
 
-        editWordViewId = findViewById(R.id.original_id)
-        editWordViewTitle = findViewById(R.id.edit_title)
-        editWordViewBody = findViewById(R.id.edit_body)
-        editWordViewAddress = findViewById(R.id.edit_address)
+        var editTitleView: EditText = findViewById(R.id.edit_title)
+        var editBodyView: EditText = findViewById(R.id.edit_body)
+        var editAddressView: EditText = findViewById(R.id.edit_address)
 
-        val button = findViewById<Button>(R.id.button_save)
-        button.setOnClickListener{
+        var id = intent.getStringExtra(PARAM_ID)
+        var title = intent.getStringExtra(PARAM_TITLE)
+        var body = intent.getStringExtra(PARAM_BODY)
+        var address = intent.getStringExtra(PARAM_ADDRESS)
+
+        editTitleView.setText(title.toString())
+        editBodyView.setText(body.toString())
+        editAddressView.setText(address.toString())
+
+        val button = findViewById<Button>(R.id.button_edit)
+        button.setOnClickListener {
             val replyIntent = Intent()
-            if(TextUtils.isEmpty(editWordViewId.text) || TextUtils.isEmpty(editWordViewTitle.text) || TextUtils.isEmpty(editWordViewBody.text) || TextUtils.isEmpty(editWordViewAddress.text)){
+            replyIntent.putExtra(EXTRA_REPLY_ID, id)
+            if (TextUtils.isEmpty(editTitleView.text)  || TextUtils.isEmpty(editBodyView.text) || TextUtils.isEmpty(editAddressView.text)) {
                 setResult(Activity.RESULT_CANCELED, replyIntent)
-            }else{
-                val replyIntent = Intent()
+            } else {
+                val edit_title = editTitleView.text.toString()
+                replyIntent.putExtra(EXTRA_REPLY_TITLE, edit_title)
 
-                val id = editWordViewId.text.toString()
-                replyIntent.putExtra(EXTRA_REPLY_ID, id)
+                val edit_body = editBodyView.text.toString()
+                replyIntent.putExtra(EXTRA_REPLY_BODY, edit_body)
 
-                val title = editWordViewTitle.text.toString()
-                replyIntent.putExtra(EXTRA_REPLY_TITLE, title)
+                val edit_address = editAddressView.text.toString()
+                replyIntent.putExtra(EXTRA_REPLY_ADDRESS, edit_address)
 
-                val body = editWordViewBody.text.toString()
-                replyIntent.putExtra(EXTRA_REPLY_BODY, body)
-
-                val address = editWordViewAddress.text.toString()
-                replyIntent.putExtra(EXTRA_REPLY_ADDRESS, address)
+                replyIntent.putExtra(EXTRA_TYPE, "EDIT")
 
                 setResult(Activity.RESULT_OK, replyIntent)
             }
             finish()
         }
 
-        /*val button = findViewById<Button>(R.id.button_save)
-        button.setOnClickListener{
+        val button_delete = findViewById<Button>(R.id.button_delete)
+        button_delete.setOnClickListener {
             val replyIntent = Intent()
-            if(TextUtils.isEmpty(editWordViewTitle.text) || TextUtils.isEmpty(editWordViewBody.text) || TextUtils.isEmpty(editWordViewAddress.text) || TextUtils.isEmpty(editWordViewOriginalTitle.text)){
+            if (TextUtils.isEmpty(editTitleView.text)  || TextUtils.isEmpty(editBodyView.text) || TextUtils.isEmpty(editAddressView.text)) {
                 setResult(Activity.RESULT_CANCELED, replyIntent)
-            }else{
-                val replyIntent = Intent()
-
-                val title = editWordViewTitle.text.toString()
-                replyIntent.putExtra(EXTRA_REPLY_TITLE, title)
-
-                val body = editWordViewBody.text.toString()
-                replyIntent.putExtra(EXTRA_REPLY_BODY, body)
-
-                val address = editWordViewAddress.text.toString()
-                replyIntent.putExtra(EXTRA_REPLY_ADDRESS, address)
-
+            } else {
+                replyIntent.putExtra(EXTRA_DELETE_ID, id)
+                replyIntent.putExtra(EXTRA_DELETE_ID, id)
+                replyIntent.putExtra(EXTRA_DELETE_ID, id)
+                replyIntent.putExtra(EXTRA_TYPE, "DELETE")
                 setResult(Activity.RESULT_OK, replyIntent)
             }
             finish()
-        }*/
+        }
     }
 
     companion object{
-
-        /*
-        const val EXTRA_REPLY_ADDRESS = "address"
-        const val EXTRA_REPLY_BODY = "body"
-        const val EXTRA_REPLY_TITLE = "title"
-        const val EXTRA_REPLY_ORIGINAL_TITLE = "originalTitle"
-        */
 
         const val EXTRA_REPLY_ID = "id"
         const val EXTRA_REPLY_ADDRESS = "address"
         const val EXTRA_REPLY_BODY = "body"
         const val EXTRA_REPLY_TITLE = "title"
+        const val EXTRA_DELETE_ID = "delete_id"
+        const val EXTRA_TYPE = ""
 
         //const val EXTRA_REPLY = "com.example.android.wordlistsql.REPLY"
     }

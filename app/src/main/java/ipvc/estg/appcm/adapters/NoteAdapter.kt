@@ -1,24 +1,33 @@
 package ipvc.estg.appcm.adapters
 
+import android.content.ClipDescription
 import android.content.Context
+import android.location.Address
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import ipvc.estg.appcm.CellClickListener
 import ipvc.estg.appcm.R
 import ipvc.estg.appcm.entities.Note
 
 class NoteAdapter internal constructor(
-    context: Context
-) : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
+        context: Context,
+        private val listener: CellClickListener
+    ) : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var notes = emptyList<Note>()
 
     class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        val noteItemView: TextView = itemView.findViewById(R.id.textView)
+        //val noteItemView: TextView = itemView.findViewById(R.id.textView)
+        val titleView: TextView = itemView.findViewById(R.id.title)
+        val bodyView: TextView = itemView.findViewById(R.id.body)
+        val addressView: TextView = itemView.findViewById(R.id.address)
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
         val itemView = inflater.inflate(R.layout.recyclerview_item, parent, false)
@@ -27,7 +36,13 @@ class NoteAdapter internal constructor(
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         val current = notes[position]
-        holder.noteItemView.text = current.id.toString() + " - " + current.title + " - " + current.body
+        //holder.noteItemView.text = current.title + " - " + current.body + " - " + current.address
+        holder.titleView.text = "Title: " + current.title
+        holder.bodyView.text = "Title: " + current.body
+        holder.addressView.text = "Title: " + current.address
+        holder.itemView.setOnClickListener{
+            listener.onCellClickListener(notes[position])
+        }
     }
 
     internal fun setNotes(notes: List<Note>){
@@ -35,5 +50,15 @@ class NoteAdapter internal constructor(
         notifyDataSetChanged()
     }
 
-    override fun getItemCount() = notes.size
+    override fun getItemCount() : Int{
+      return notes.size
+    }
+
+
+/*
+    //Interage com a mainActivity
+    interface OnItemClickListener{
+        fun onItemClick(id:Int?, title: String, body: String, address: String)
+    }
+ */
 }

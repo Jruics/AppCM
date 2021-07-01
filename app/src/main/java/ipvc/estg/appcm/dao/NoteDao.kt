@@ -24,6 +24,12 @@ interface NoteDao {
     @Update
     suspend fun updateNote(note: Note)
 
+    @Query("UPDATE note_table SET title = :title, body = :body ,address = :address WHERE id == :id")
+    suspend fun update(id: Int?, title: String, body: String, address: String)
+
+    @Query("DELETE FROM note_table WHERE id == :id")
+    suspend fun delete(id: Int?)
+
     @Query("DELETE FROM note_table")
     suspend fun deleteAll();
 
@@ -32,6 +38,7 @@ interface NoteDao {
 
     @Query("DELETE FROM note_table WHERE id == :id")
     suspend fun deleteByID(id :Int)
+
 
     @Query("UPDATE note_table SET title = :title, body = :body, address = :address  WHERE id == :id")
     suspend fun updateNoteFromId(title: String, body: String, address: String, id: Int)

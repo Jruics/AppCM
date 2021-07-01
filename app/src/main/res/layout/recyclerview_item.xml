@@ -2,12 +2,35 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:padding="10dp">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/title"
         style="@style/word_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:padding="10dp"
+        android:text="Title: Title"
+        android:background="@android:color/holo_orange_light" />
+
+    <TextView
+        android:id="@+id/body"
+        style="@style/word_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:padding="10dp"
+        android:background="@android:color/holo_orange_light"
+        android:text="Body: Body" />
+
+    <TextView
+        android:id="@+id/address"
+        style="@style/word_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Address: Address"
         android:background="@android:color/holo_orange_light" />
 </LinearLayout>

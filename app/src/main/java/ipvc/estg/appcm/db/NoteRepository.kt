@@ -23,6 +23,14 @@ class NoteRepository(private val noteDao: NoteDao) {
         noteDao.insert(note)
     }
 
+    suspend fun update(id: Int?, titulo: String, body: String, address: String){
+        noteDao.update(id, titulo, body, address)
+    }
+
+    suspend fun delete(id: Int?){
+        noteDao.delete(id)
+    }
+
     suspend fun deleteAll(){
         noteDao.deleteAll()
     }

@@ -31,7 +31,7 @@ class AddNote : AppCompatActivity() {
             if(TextUtils.isEmpty(editWordViewTitle.text) || TextUtils.isEmpty(editWordViewBody.text) || TextUtils.isEmpty(editWordViewAddress.text)){
                 setResult(Activity.RESULT_CANCELED, replyIntent)
             }else{
-                val replyIntent = Intent()
+                //val replyIntent = Intent()
 
                 val title = editWordViewTitle.text.toString()
                 replyIntent.putExtra(EXTRA_REPLY_TITLE, title)
@@ -53,6 +53,7 @@ class AddNote : AppCompatActivity() {
         const val EXTRA_REPLY_ADDRESS = "address"
         const val EXTRA_REPLY_BODY = "body"
         const val EXTRA_REPLY_TITLE = "title"
+
 
         //const val EXTRA_REPLY = "com.example.android.wordlistsql.REPLY"
     }

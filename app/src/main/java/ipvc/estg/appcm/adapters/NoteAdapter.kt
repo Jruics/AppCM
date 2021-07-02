@@ -9,13 +9,13 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import ipvc.estg.appcm.CellClickListener
+import ipvc.estg.appcm.OnItemClickListener
 import ipvc.estg.appcm.R
 import ipvc.estg.appcm.entities.Note
 
 class NoteAdapter internal constructor(
         context: Context,
-        private val listener: CellClickListener
+        private val listener: OnItemClickListener
     ) : RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
@@ -41,7 +41,7 @@ class NoteAdapter internal constructor(
         holder.bodyView.text = "Title: " + current.body
         holder.addressView.text = "Title: " + current.address
         holder.itemView.setOnClickListener{
-            listener.onCellClickListener(notes[position])
+            listener.onItemClickListener(notes[position])
         }
     }
 

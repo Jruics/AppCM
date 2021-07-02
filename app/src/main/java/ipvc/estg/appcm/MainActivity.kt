@@ -25,7 +25,7 @@ const val PARAM_BODY: String = "body"
 const val PARAM_ADDRESS: String = "address"
 
 //class MainActivity : AppCompatActivity(), NoteAdapter.OnItemClickListener{
-class MainActivity : AppCompatActivity(), CellClickListener{
+class MainActivity : AppCompatActivity(), OnItemClickListener{
 
     private lateinit var noteViewModel: NoteViewModel
     private val newNoteActivityRequestCode = 1
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity(), CellClickListener{
         }
     }
 
-    override fun onCellClickListener(data: Note) {
+    override fun onItemClickListener(data: Note) {
         val intent = Intent(this, EditNote::class.java)
         intent.putExtra(PARAM_ID, data.id.toString())
         intent.putExtra(PARAM_TITLE, data.title.toString())

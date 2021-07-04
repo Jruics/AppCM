@@ -15,4 +15,9 @@ class HomeActivity : AppCompatActivity(){
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
+
+    fun loginPageRedirect(view: View) {
+        val intent = Intent(this, LoginPage::class.java)
+        startActivity(intent)
+    }
 }

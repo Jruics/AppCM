@@ -10,17 +10,19 @@
         android:id="@+id/login_buton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
-        android:text="Login"
+        android:layout_marginBottom="56dp"
+        android:onClick="loginPageRedirect"
+        android:text="Login Page"
         app:layout_constraintBottom_toTopOf="@+id/offlineNotes_button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/offlineNotes_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="92dp"
+        android:layout_marginBottom="96dp"
         android:onClick="offlineNotes"
         android:text="Offline Notes"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -3,9 +3,7 @@ package ipvc.estg.appcm
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.text.TextUtils
-import android.widget.ActionMenuView
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
@@ -18,8 +16,8 @@ class EditNote : AppCompatActivity() {
         setContentView(R.layout.activity_edit_note)
 
 
-        var editTitleView: EditText = findViewById(R.id.edit_title)
-        var editBodyView: EditText = findViewById(R.id.edit_body)
+        var editTitleView: EditText = findViewById(R.id.edit_type)
+        var editBodyView: EditText = findViewById(R.id.edit_description)
         var editAddressView: EditText = findViewById(R.id.edit_address)
 
         var id = intent.getStringExtra(PARAM_ID)
@@ -78,6 +76,7 @@ class EditNote : AppCompatActivity() {
         const val EXTRA_REPLY_TITLE = "title"
         const val EXTRA_DELETE_ID = "delete_id"
         const val EXTRA_TYPE = ""
+        const val STATUS = ""
 
         //const val EXTRA_REPLY = "com.example.android.wordlistsql.REPLY"
     }

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">AppCM</string>
     <string name="add_word">+</string>
+    <string name="welcomeSignedUser">Welcome</string>
 </resources>

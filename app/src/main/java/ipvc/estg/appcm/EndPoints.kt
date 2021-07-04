@@ -1,10 +1,7 @@
 package ipvc.estg.appcm
 
 import retrofit2.Call
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface EndPoints {
     @FormUrlEncoded
@@ -13,7 +10,7 @@ interface EndPoints {
 
     @FormUrlEncoded
     @POST("/myslim/api/notes")
-    fun reportar(@Field("title") title: String?,
+    fun create(@Field("title") title: String?,
                  @Field("latitude") latitude: String?,
                  @Field("longitude") longitude: String?,
                  @Field("description") description: String?,
@@ -23,7 +20,8 @@ interface EndPoints {
 
     @FormUrlEncoded
     @POST("/myslim/api/notes/{id}")
-    fun editar(@Field("title") title: String?,
+    fun edit(@Path("id") id: String?,
+               @Field("title") title: String?,
                @Field("latitude") latitude: String?,
                @Field("longitude") longitude: String?,
                @Field("description") description: String?,
@@ -33,5 +31,11 @@ interface EndPoints {
 
 
     @POST("/myslim/api/notes/{id}")
-    fun apagar(@Path("id") id: String?): Call<OutputDeleteNote>
+    fun delete(@Path("id") id: String?): Call<OutputDeleteNote>
+
+    @GET("/myslim/api/note")
+    fun getNotes(): Call<List<Note>>
+
+    @GET ("/myslim/api/note/{id}")
+    fun getNotesById(@Path("id") id: String?): Call<List<Note>>
 }

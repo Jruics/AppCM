@@ -3,8 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <item android:id="@+id/todasNotas"
-        android:title="Todas as Notas"
+    <item
+        android:id="@+id/todasNotas"
+        android:title="@string/menuAllNotes"
         app:showAsAction="never">
 
     </item>
@@ -17,8 +18,9 @@
     </item>
     -->
 
-    <item android:id="@+id/apagarTudo"
-        android:title="Apagar Tudo"
+    <item
+        android:id="@+id/apagarTudo"
+        android:title="@string/menuDeleteAllNotes"
         app:showAsAction="never">
 
     </item>

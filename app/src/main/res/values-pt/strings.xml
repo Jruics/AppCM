@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AppCM</string>
+    <string name="add_word">+</string>
+    <string name="welcomeSignedUser" translatable="false">Bem-Vindo</string>
+    <string name="addNoteType" translatable="false">Tipo</string>
+    <string name="addNoteDescription">Descrição</string>
+    <string name="addNoteAddress">Morada</string>
+    <string name="createNoteTitle">Título</string>
+    <string name="buttonSave">Guardar</string>
+    <string name="buttonEdit">Editar</string>
+    <string name="buttonDelete">Apagar</string>
+    <string name="buttonNotesMap">Mapa com Notas</string>
+    <string name="buttonCreateNote">Criar Nota</string>
+    <string name="buttonSeeAllNotes">Ver Todas as Notas</string>
+    <string name="buttonLogout">Logout</string>
+    <string name="loginUsernameText">Nome de Utilizador:</string>
+    <string name="loginPasswordText">Palavra-Passe:</string>
+    <string name="rememberCheckbox">Lembrar o utilizador:</string>
+    <string name="buttonLogin">Login</string>
+    <string name="buttonOfflineNotes">Notas Offline</string>
+    <string name="recyclerItemTitle">Título: Título</string>
+    <string name="recyclerItemBody">Corpo: Corpo</string>
+    <string name="recyclerItemAddress">Morada: Morada</string>
+    <string name="recyclerItemLatitude">Latitude: 20</string>
+    <string name="recyclerItemLongitude">Longitude: 20</string>
+    <string name="recyclerItemType">Tipo: Tipo</string>
+    <string name="recyclerItemDescription">Descrição: Descrição</string>
+    <string name="menuAllNotes">Todas as Notas</string>
+    <string name="menuDeleteAllNotes">Apagar Todas as Notas</string>
+</resources>

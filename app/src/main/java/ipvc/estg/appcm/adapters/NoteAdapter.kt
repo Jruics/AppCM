@@ -36,10 +36,9 @@ class NoteAdapter internal constructor(
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         val current = notes[position]
-        //holder.noteItemView.text = current.title + " - " + current.body + " - " + current.address
         holder.titleView.text = "Title: " + current.title
-        holder.bodyView.text = "Title: " + current.body
-        holder.addressView.text = "Title: " + current.address
+        holder.bodyView.text = "Body: " + current.body
+        holder.addressView.text = "Address: " + current.address
         holder.itemView.setOnClickListener{
             listener.onItemClickListener(notes[position])
         }
@@ -53,12 +52,4 @@ class NoteAdapter internal constructor(
     override fun getItemCount() : Int{
       return notes.size
     }
-
-
-/*
-    //Interage com a mainActivity
-    interface OnItemClickListener{
-        fun onItemClick(id:Int?, title: String, body: String, address: String)
-    }
- */
 }

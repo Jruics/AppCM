@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:onClick="notesMap"
-        android:text="Notes Map"
+        android:text="@string/buttonNotesMap"
         app:layout_constraintBottom_toTopOf="@+id/createNoteButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="144dp"
         android:onClick="logout"
-        android:text="Logout"
+        android:text="@string/buttonLogout"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:onClick="noteCreate"
-        android:text="Create a note"
+        android:text="@string/buttonCreateNote"
         app:layout_constraintBottom_toTopOf="@+id/seeNotesButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -57,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
         android:onClick="noteList"
-        android:text="See all notes"
+        android:text="@string/buttonSeeAllNotes"
         app:layout_constraintBottom_toTopOf="@+id/logoutButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

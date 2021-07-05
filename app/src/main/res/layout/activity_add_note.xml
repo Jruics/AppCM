@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-light"
+        android:hint="@string/addNoteType"
         android:inputType="textAutoComplete"
         android:textSize="18sp" />
 
@@ -18,6 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-light"
+        android:hint="@string/addNoteDescription"
         android:inputType="textAutoComplete"
         android:textSize="18sp" />
 
@@ -26,6 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-light"
+        android:hint="@string/addNoteAddress"
         android:inputType="textAutoComplete"
         android:textSize="18sp" />
 
@@ -34,6 +37,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:text="Save" />
+        android:text="@string/buttonSave" />
 
 </LinearLayout>

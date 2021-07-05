@@ -19,8 +19,8 @@ interface EndPoints {
                  @Field("user_id") user_id: Int?): Call<OutputCreateNote>
 
     @FormUrlEncoded
-    @POST("/myslim/api/notes/{id}")
-    fun edit(@Path("id") id: String?,
+    @POST("/myslim/api/notes_edit/{id}")
+    fun editBugged(@Path("id") id: String?,
                @Field("title") title: String?,
                @Field("latitude") latitude: String?,
                @Field("longitude") longitude: String?,
@@ -29,13 +29,24 @@ interface EndPoints {
                @Field("photo") photo: String?,
                @Field("user_id") user_id: Int?): Call<OutputEditNote>
 
+    @FormUrlEncoded
+    @POST("/myslim/api/notes_edit_test/{id}")
+    fun edit(@Path("id") id: String?,
+             @Field("title") title: String?,
+             @Field("latitude") latitude: String?,
+             @Field("longitude") longitude: String?,
+             @Field("description") description: String?,
+             @Field("category") category: String?,
+             @Field("photo") photo: String?,
+             @Field("user_id") user_id: Int?): Call<OutputEditNote>
 
-    @POST("/myslim/api/notes/{id}")
+
+    @POST("/myslim/api/notes_delete/{id}")
     fun delete(@Path("id") id: String?): Call<OutputDeleteNote>
 
-    @GET("/myslim/api/note")
+    @GET("/myslim/api/notes")
     fun getNotes(): Call<List<Note>>
 
-    @GET ("/myslim/api/note/{id}")
+    @GET ("/myslim/api/notes/{id}")
     fun getNotesById(@Path("id") id: String?): Call<List<Note>>
 }

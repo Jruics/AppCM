@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.*
 import ipvc.estg.appcm.NotesOnMapActivity.Companion.PARAM_DESCRIPTION
+import ipvc.estg.appcm.NotesOnMapActivity.Companion.PARAM_ID
 import ipvc.estg.appcm.NotesOnMapActivity.Companion.PARAM_TYPE
 
 class EditOrDeleteNote : AppCompatActivity() {
@@ -38,9 +39,9 @@ class EditOrDeleteNote : AppCompatActivity() {
 
         var id = intent.getStringExtra(PARAM_ID)
         var type = intent.getStringExtra(PARAM_TYPE)
-        var descricao = intent.getStringExtra(PARAM_DESCRIPTION)
+        var description = intent.getStringExtra(PARAM_DESCRIPTION)
         editTypeView.setText(type.toString())
-        editDescriptionView.setText(descricao.toString())
+        editDescriptionView.setText(description.toString())
         Log.d("****TIPO", type.toString())
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)

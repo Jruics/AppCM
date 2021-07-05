@@ -21,21 +21,44 @@
         android:id="@+id/mapButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="24dp"
         android:onClick="notesMap"
         android:text="Notes Map"
-        app:layout_constraintBottom_toTopOf="@+id/logoutButton"
+        app:layout_constraintBottom_toTopOf="@+id/createNoteButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/logoutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="280dp"
+        android:layout_marginBottom="144dp"
         android:onClick="logout"
         android:text="Logout"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/createNoteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:onClick="noteCreate"
+        android:text="Create a note"
+        app:layout_constraintBottom_toTopOf="@+id/seeNotesButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/seeNotesButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:onClick="noteList"
+        android:text="See all notes"
+        app:layout_constraintBottom_toTopOf="@+id/logoutButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

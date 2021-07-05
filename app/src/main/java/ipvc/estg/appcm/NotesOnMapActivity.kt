@@ -27,12 +27,12 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class NotesOnMapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
-    private lateinit var mMap: GoogleMap
+    private lateinit var myMap: GoogleMap
     private lateinit var  notes: List<Note>
     private lateinit var lastLocation: Location
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val LOCATION_PERMISSION_REQUEST_CODE = 1
-    private val newProblemaEditarActivityRequestCode = 1
+    private val newEditNoteActivityRequestCode = 1
     private lateinit var shared_preferences: SharedPreferences
 
 
@@ -61,10 +61,10 @@ class NotesOnMapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.On
                     for (note in notes){
                         position = LatLng(note.latitude.toDouble(), note.longitude.toDouble())
                         if(note.user_id == user_id){
-                            mMap.addMarker(MarkerOptions().position(position).title(note.id.toString()).snippet(note.type + "-" + note.description))
+                            myMap.addMarker(MarkerOptions().position(position).title(note.id.toString()).snippet(note.category + "-" + note.description))
                                     .setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN))
                         }else{
-                            mMap.addMarker(MarkerOptions().position(position).title(note.id.toString()).snippet(note.type + "-" + note.description))
+                            myMap.addMarker(MarkerOptions().position(position).title(note.id.toString()).snippet(note.category + "-" + note.description))
                         }
 
                     }
@@ -87,18 +87,17 @@ class NotesOnMapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.On
             override fun onResponse(call: Call<List<Note>>, response: Response<List<Note>>) {
                 if(response.isSuccessful){
                     notes = response.body()!!
-                    for(problema in notes){
-                        if(problema.user_id == user_id){
-                            Toast.makeText(this@NotesOnMapActivity, problema.description, Toast.LENGTH_SHORT).show()
-                            val intent = Intent(this@NotesOnMapActivity,EditOrDeleteNote::class.java)
-                            intent.putExtra(PARAM_ID, problema.id.toString())
-                            intent.putExtra(PARAM_TYPE, problema.type)
-                            intent.putExtra(PARAM_DESCRIPTION, problema.description)
-                            intent.putExtra(PARAM_LATITUDE, problema.latitude)
-                            intent.putExtra(PARAM_LONGITUDE, problema.longitude)
-                            intent.putExtra(PARAM_LONGITUDE, problema.longitude)
-                            intent.putExtra(PARAM_UTILIZADOR_ID, problema.user_id.toString())
-                            startActivityForResult(intent, newProblemaEditarActivityRequestCode)
+                    for(note in notes){
+                        if(note.user_id == user_id){
+                            Toast.makeText(this@NotesOnMapActivity, note.description, Toast.LENGTH_SHORT).show()
+                            val intent = Intent(this@NotesOnMapActivity, EditOrDeleteNote::class.java)
+                            intent.putExtra(PARAM_ID, note.id.toString())
+                            intent.putExtra(PARAM_TYPE, note.category)
+                            intent.putExtra(PARAM_DESCRIPTION, note.description)
+                            intent.putExtra(PARAM_LATITUDE, note.latitude)
+                            intent.putExtra(PARAM_LONGITUDE, note.longitude)
+                            intent.putExtra(PARAM_USER_ID, note.user_id.toString())
+                            startActivityForResult(intent, newEditNoteActivityRequestCode)
                         }else{
                             Toast.makeText(this@NotesOnMapActivity,"You can't edit this note", Toast.LENGTH_LONG).show()
                         }
@@ -122,13 +121,13 @@ class NotesOnMapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.On
      * installed Google Play services and returned to the app.
      */
     override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
+        myMap = googleMap
 
         // Add a marker in Sydney and move the camera
         /*val sydney = LatLng(-34.0, 151.0)
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))*/
-        mMap.setOnInfoWindowClickListener(this)
+        myMap.setOnInfoWindowClickListener(this)
         setUpMap()
     }
 
@@ -142,7 +141,7 @@ class NotesOnMapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.On
             return
         } else{
             //1
-            mMap.isMyLocationEnabled = true
+            myMap.isMyLocationEnabled = true
 
             //2
             fusedLocationClient.lastLocation.addOnSuccessListener(this) {location ->
@@ -151,7 +150,7 @@ class NotesOnMapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.On
                     lastLocation = location
                     //Toast.makeText(this@MapsActivity, lastLocation.toString(), Toast.LENGTH_SHORT).show()
                     val currentLatLng = LatLng(location.latitude, location.longitude)
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12f))
+                    myMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12f))
                 }
             }
         }
@@ -161,7 +160,7 @@ class NotesOnMapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.On
         super.onActivityResult(requestCode, resultCode, data)
 
         // EDITAR E APAGAR NOTA
-        if (requestCode == newProblemaEditarActivityRequestCode && resultCode == Activity.RESULT_OK) {
+        if (requestCode == newEditNoteActivityRequestCode && resultCode == Activity.RESULT_OK) {
             var id = data?.getStringExtra(EditOrDeleteNote.EDIT_ID)
             var id_delete = data?.getStringExtra(EditOrDeleteNote.DELETE_ID)
             var edit_type = data?.getStringExtra(EditOrDeleteNote.EDIT_TYPE).toString()
@@ -237,7 +236,7 @@ class NotesOnMapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.On
         const val PARAM_DESCRIPTION = "PARAM_DESCRIPTION"
         const val PARAM_LATITUDE = "PARAM_LATITUDE"
         const val PARAM_LONGITUDE = "PARAM_LONGITUDE"
-        const val PARAM_UTILIZADOR_ID = "PARAM_UTILIZADOR_ID"
+        const val PARAM_USER_ID = "PARAM_USER_ID"
     }
 
 }

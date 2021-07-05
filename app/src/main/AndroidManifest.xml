@@ -36,6 +36,8 @@
         <activity android:name=".LoggedInPage"></activity>
         <activity android:name=".NotesOnMapActivity"></activity>
         <activity android:name=".EditOrDeleteNote"></activity>
+        <activity android:name=".ListAllNotes"></activity>
+        <activity android:name=".NoteCreate"></activity>
 
     </application>
 

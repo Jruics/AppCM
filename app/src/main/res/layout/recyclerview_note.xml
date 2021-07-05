@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/latitude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:background="@android:color/holo_orange_light"
+        android:padding="10dp"
+        android:text="Latitude: 20"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/longitude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:background="@android:color/holo_orange_light"
+        android:padding="10dp"
+        android:text="Longitude: 20"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/type"
+        style="@style/word_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:padding="10dp"
+        android:text="Type: Type"
+        android:background="@android:color/holo_orange_light" />
+
+    <TextView
+        android:id="@+id/description"
+        style="@style/word_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:padding="10dp"
+        android:background="@android:color/holo_orange_light"
+        android:text="Description: Description" />
+
+</LinearLayout>

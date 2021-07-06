@@ -3,6 +3,7 @@ package ipvc.estg.appcm.adapters
 import android.content.ClipDescription
 import android.content.Context
 import android.location.Address
+import android.provider.Settings.Global.getString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,6 +40,7 @@ class NoteAdapter internal constructor(
         holder.titleView.text = "Title: " + current.title
         holder.bodyView.text = "Body: " + current.body
         holder.addressView.text = "Address: " + current.address
+        //holder.addressView.text = R.string.recyclerItemAddress.toString() + current.address
         holder.itemView.setOnClickListener{
             listener.onItemClickListener(notes[position])
         }

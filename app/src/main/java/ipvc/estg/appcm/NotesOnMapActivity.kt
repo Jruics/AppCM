@@ -99,7 +99,7 @@ class NotesOnMapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.On
                             intent.putExtra(PARAM_USER_ID, note.user_id.toString())
                             startActivityForResult(intent, newEditNoteActivityRequestCode)
                         }else{
-                            Toast.makeText(this@NotesOnMapActivity,"You can't edit this note", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@NotesOnMapActivity,R.string.notOwnedNote, Toast.LENGTH_LONG).show()
                         }
 
                     }
@@ -221,9 +221,9 @@ class NotesOnMapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.On
 
         } else if (resultCode == Activity.RESULT_CANCELED) {
             if(data?.getStringExtra(EditNote.STATUS) == "EDIT"){
-                Toast.makeText(this, "Note not changed, some fields may be empty", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.editNoChangedFields, Toast.LENGTH_SHORT).show()
             } else if(data?.getStringExtra(EditNote.STATUS) == "DELETE"){
-                Toast.makeText(this, "Note not deleted, some fields may be empty", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.deleteNoChangedFields, Toast.LENGTH_SHORT).show()
             }
         }
     }

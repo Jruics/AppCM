@@ -90,7 +90,7 @@ class NoteCreate : AppCompatActivity() {
             override fun onResponse(call: Call<OutputCreateNote>, response: Response<OutputCreateNote>){
                 if (response.isSuccessful){
                     val c: OutputCreateNote = response.body()!!
-                    Toast.makeText(this@NoteCreate, c.statusMessage, Toast.LENGTH_LONG).show()
+                    //Toast.makeText(this@NoteCreate, c.statusMessage, Toast.LENGTH_LONG).show()
                     val intent = Intent(this@NoteCreate, NotesOnMapActivity::class.java)
                     startActivity(intent);
                     finish()

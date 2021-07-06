@@ -27,4 +27,13 @@
     <string name="recyclerItemDescription">Description: Description</string>
     <string name="menuAllNotes">All Notes</string>
     <string name="menuDeleteAllNotes">Delete All Notes</string>
+    <string name="errorCreatingNote">Error creating note</string>
+    <string name="noteEditedSuccessfully">Note edited successfully</string>
+    <string name="noteDeletedSuccessfully">Note deleted successfully</string>
+    <string name="errorEditingNote">Error editing note</string>
+    <string name="errorDeletingNote">Error deleting note</string>
+    <string name="loginError">Login error</string>
+    <string name="notOwnedNote">You can not edit this note</string>
+    <string name="editNoChangedFields">Note unchanged, some fields may be empty</string>
+    <string name="deleteNoChangedFields">Note not deleted, some fields may be empty</string>
 </resources>

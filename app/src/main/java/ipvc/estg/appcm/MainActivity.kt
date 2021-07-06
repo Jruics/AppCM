@@ -59,8 +59,8 @@ class MainActivity : AppCompatActivity(), OnItemClickListener{
         intent.putExtra(PARAM_BODY, data.body.toString())
         intent.putExtra(PARAM_ADDRESS, data.address.toString())
         startActivityForResult(intent, changeNoteActivityRequestCode)
-        Log.e("***ID", data.id.toString())
-        Toast.makeText(this, "Note touched" + data.id.toString() + data.title.toString() + data.address.toString(), Toast.LENGTH_SHORT).show()
+        //Log.e("***ID", data.id.toString())
+        //Toast.makeText(this, "Note touched" + data.id.toString() + data.title.toString() + data.address.toString(), Toast.LENGTH_SHORT).show()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -76,7 +76,7 @@ class MainActivity : AppCompatActivity(), OnItemClickListener{
 
 
         } else if (resultCode == Activity.RESULT_CANCELED) {
-            Toast.makeText(this, "Error creating", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, R.string.errorCreatingNote, Toast.LENGTH_SHORT).show()
         }
 
         // EDITAR E APAGAR NOTA
@@ -89,16 +89,16 @@ class MainActivity : AppCompatActivity(), OnItemClickListener{
             var id_delete = data?.getStringExtra(EditNote.EXTRA_DELETE_ID)
             if(data?.getStringExtra(EditNote.EXTRA_TYPE) == "EDIT"){
                 noteViewModel.update(id?.toIntOrNull(), edit_title, edit_body, edit_address)
-                Toast.makeText(this, "Note altered", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.noteEditedSuccessfully, Toast.LENGTH_SHORT).show()
             } else if(data?.getStringExtra(EditNote.EXTRA_TYPE) == "DELETE"){
                 noteViewModel.delete(id_delete?.toIntOrNull())
-                Toast.makeText(this, "Note deleted", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.noteDeletedSuccessfully, Toast.LENGTH_SHORT).show()
             }
         } else if (resultCode == Activity.RESULT_CANCELED) {
             if(data?.getStringExtra(EditNote.EXTRA_TYPE) == "EDIT"){
-                Toast.makeText(this, "Error editing", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.errorEditingNote, Toast.LENGTH_SHORT).show()
             } else if(data?.getStringExtra(EditNote.EXTRA_TYPE) == "DELETE"){
-                Toast.makeText(this, "Error deleting", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.errorDeletingNote, Toast.LENGTH_SHORT).show()
             }
         }
     }

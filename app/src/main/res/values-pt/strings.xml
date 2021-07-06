@@ -28,4 +28,13 @@
     <string name="recyclerItemDescription">Descrição: Descrição</string>
     <string name="menuAllNotes">Todas as Notas</string>
     <string name="menuDeleteAllNotes">Apagar Todas as Notas</string>
+    <string name="errorCreatingNote">Erro a criar nota</string>
+    <string name="noteEditedSuccessfully">Nota editada com sucesso</string>
+    <string name="noteDeletedSuccessfully">Nota apagada com sucesso</string>
+    <string name="errorEditingNote">Erro a editar nota</string>
+    <string name="errorDeletingNote">Erro a apagar nota</string>
+    <string name="loginError">Erro no login</string>
+    <string name="notOwnedNote">Não pode editar esta nota</string>
+    <string name="editNoChangedFields">Nota não foi alterada, alguns campos podem estar vazios</string>
+    <string name="deleteNoChangedFields">Nota não foi apagada, alguns campos podem estar vazios</string>
 </resources>

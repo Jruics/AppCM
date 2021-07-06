@@ -53,7 +53,7 @@ class LoginPage : AppCompatActivity() {
                 if (response.isSuccessful){
                     val c: OutputLoginPage = response.body()!!
                     if(TextUtils.isEmpty(loginUsernameBox.text) || TextUtils.isEmpty(loginPasswordBox.text)) {
-                        Toast.makeText(this@LoginPage, "Login error", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@LoginPage, R.string.loginError, Toast.LENGTH_LONG).show()
                     }else{
                         if(c.status =="false"){
                             Toast.makeText(this@LoginPage, c.statusMessage, Toast.LENGTH_LONG).show()
